@@ -23,7 +23,7 @@ services:
     container_name: 'caesar'
     build: ./
     image: caesar:latest
-    entrypoint: ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    entrypoint: ["java","-jar","/app.jar"]
     restart: always
     ports:
       - "8080:8081"
