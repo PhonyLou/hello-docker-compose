@@ -1,2 +1,6 @@
 
 __pycache__/
+.DS_Store
+caesar/.idea/
+caesar/target/
+*.iml
