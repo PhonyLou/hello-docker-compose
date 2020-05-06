@@ -19,15 +19,33 @@ services:
       - "16543:80"
     depends_on:
       - db
-  web:
+  caesar:
     container_name: 'caesar'
     build: ./caesar
     image: caesar:latest
     entrypoint: ["java","-jar","/app.jar"]
     restart: always
     ports:
-      - "8080:8081"
+      - "8081:8081"
     depends_on:
       - db
+  postman:
+    container_name: 'postman'
+    build: ./postman
+    image: postman:latest
+    entrypoint: ["java","-jar","/app.jar"]
+    restart: always
+    ports:
+      - "8082:8081"
+    depends_on:
+      - redis
+  redis:
+    image: redis
+    container_name: postman_redis
+    command: redis-server --requirepass root
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
 volumes:
   pgdata:
