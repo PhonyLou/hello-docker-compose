@@ -18,6 +18,10 @@ public class Directive {
         this.directive = directive;
     }
 
+    public Directive(String directive) {
+        this.directive = directive;
+    }
+
     public Directive() {
     }
 
