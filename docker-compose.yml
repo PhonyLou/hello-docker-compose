@@ -58,6 +58,19 @@ services:
       - "6379:6379"
     volumes:
       - ./data:/data
+
+  pompeii:
+    container_name: 'pompeii'
+    networks:
+      - network_battlefront
+    build: ./pompeii
+    image: pompeii:latest
+    entrypoint: ["java","-jar","/app.jar"]
+    restart: always
+    ports:
+      - "8083:8081"
+    depends_on:
+      - redis
 networks:
   network_roman:
     driver: bridge
