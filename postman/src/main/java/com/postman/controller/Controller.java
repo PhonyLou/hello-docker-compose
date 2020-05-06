@@ -14,7 +14,12 @@ public class Controller {
 
 
     @GetMapping("/directive")
-    public String getAllDirective() {
-        return postmanService.hello();
+    public String getDirective() {
+        return postmanService.command().getDirective();
+    }
+
+    @GetMapping("/forward")
+    public String forwardDirective() {
+        return postmanService.hello(postmanService.command());
     }
 }
