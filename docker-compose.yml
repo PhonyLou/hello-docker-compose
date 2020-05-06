@@ -21,7 +21,7 @@ services:
       - db
   web:
     container_name: 'caesar'
-    build: ./
+    build: ./caesar
     image: caesar:latest
     entrypoint: ["java","-jar","/app.jar"]
     restart: always
