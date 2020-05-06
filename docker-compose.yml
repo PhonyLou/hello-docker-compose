@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_PASSWORD: root
     volumes:
-      - pgdata:/var/lib/postgresql/data/
+      - ./pgdata:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
   dbGUI:
@@ -47,5 +47,3 @@ services:
       - "6379:6379"
     volumes:
       - ./data:/data
-volumes:
-  pgdata:
