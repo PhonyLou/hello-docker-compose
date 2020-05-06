@@ -2,6 +2,8 @@ version: '3'
 services:
   db:
     container_name: 'postgres'
+    networks:
+      - network_roman
     image: postgres
     environment:
       POSTGRES_PASSWORD: root
@@ -11,6 +13,8 @@ services:
       - "5432:5432"
   dbGUI:
     container_name: 'pgadmin'
+    networks:
+      - network_roman
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: "kenny@example.com"
@@ -21,6 +25,8 @@ services:
       - db
   caesar:
     container_name: 'caesar'
+    networks:
+      - network_roman
     build: ./caesar
     image: caesar:latest
     entrypoint: ["java","-jar","/app.jar"]
@@ -31,6 +37,9 @@ services:
       - db
   postman:
     container_name: 'postman'
+    networks:
+      - network_roman
+      - network_battlefront
     build: ./postman
     image: postman:latest
     entrypoint: ["java","-jar","/app.jar"]
@@ -41,9 +50,16 @@ services:
       - redis
   redis:
     image: redis
+    networks:
+      - network_battlefront
     container_name: postman_redis
     command: redis-server --requirepass root
     ports:
       - "6379:6379"
     volumes:
       - ./data:/data
+networks:
+  network_roman:
+    driver: bridge
+  network_battlefront:
+    driver: bridge
