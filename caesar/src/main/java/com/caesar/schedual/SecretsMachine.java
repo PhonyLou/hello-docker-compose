@@ -8,6 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @Configurable
 @EnableScheduling
@@ -19,7 +21,7 @@ public class SecretsMachine {
     @Scheduled(cron = " 0/10 * * * * ? ")
     public void issueCommand() {
         System.out.println("HElloooo==========");
-        Directive directive = new Directive(System.currentTimeMillis() + "");
+        Directive directive = new Directive("Next security token is [ " + LocalDateTime.now() + " ]");
         directiveRepository.save(directive);
     }
 }
